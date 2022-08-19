@@ -1,8 +1,6 @@
 import React from "react";
+import BoardContainer from "../../components/Board.container";
+
 export default function BoardPage() {
-  return (
-    <div>
-      <div>board</div>
-    </div>
-  );
+  return <BoardContainer />;
 }
