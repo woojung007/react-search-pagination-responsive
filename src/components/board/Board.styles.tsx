@@ -11,16 +11,27 @@ export const Banner = styled.div`
   width: 100vw;
   height: 300px;
   background: url("/images/banner_pattern.png") no-repeat center center;
+  background-size: cover;
   position: fixed;
   z-index: 30;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
+
+  @media (min-width: 360px) and (max-width: 1023px) {
+    width: 100vw;
+    height: 240px;
+  }
 `;
 
 export const Characters = styled.img`
   width: 560px;
   height: 300px;
+
+  @media (min-width: 360px) and (max-width: 1023px) {
+    width: 360px;
+    height: 193px;
+  }
 `;
 
 export const TopDiv = styled.div`
@@ -28,6 +39,10 @@ export const TopDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (min-width: 360px) and (max-width: 1023px) {
+    padding-top: 288px;
+  }
 `;
 
 export const H1 = styled.h1`
@@ -36,6 +51,11 @@ export const H1 = styled.h1`
   line-height: 56px;
   text-align: center;
   letter-spacing: -0.05em;
+
+  @media (min-width: 360px) and (max-width: 1023px) {
+    font-size: 28px;
+    line-height: 36px;
+  }
 `;
 
 export const Content = styled.p`
@@ -135,13 +155,6 @@ export const FilterTop = styled.div`
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #000;
-  margin-bottom: 24px;
-`;
-
-export const FilterWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
   margin-bottom: 24px;
 `;
 

@@ -59,24 +59,7 @@ export default function BoardPresenter(props: IPropsBoardPresenter) {
             onClick={props.onClickFilterIcon}
           />
         </S.FilterTop>
-        {props.isFilter && (
-          <S.FilterWrapper>
-            <span
-              style={{
-                fontWeight: 700,
-                fontSize: "16px",
-                lineHeight: "24px",
-                letterSpacing: "-0.05em",
-                color: "#000",
-                paddingRight: "24px",
-              }}
-            >
-              보유아파트
-            </span>
-
-            <FilterPage />
-          </S.FilterWrapper>
-        )}
+        {props.isFilter && <FilterPage />}
 
         {props.data?.map((el: any, idx: string) => (
           <S.FilterItem
