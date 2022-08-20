@@ -2,7 +2,11 @@ import React from "react";
 import { FiSearch } from "react-icons/fi";
 import * as S from "./Board.styles";
 
-export default function BoardPresenter() {
+interface IPropsBoardPresenter {
+  data: any;
+}
+
+export default function BoardPresenter(props: IPropsBoardPresenter) {
   return (
     <S.Wrapper>
       <S.Banner>
@@ -29,35 +33,37 @@ export default function BoardPresenter() {
           </S.Total>
           <S.FilterIcon src="/images/filter.svg" />
         </S.FilterTop>
-        <S.FilterItem>
-          <S.Profile src="/images/profile.png" />
-          <S.ProfileContent>
-            <S.ContentTop>
-              차차{" "}
-              <span
-                style={{
-                  color: "#4498F2",
-                  fontSize: "14px",
-                  lineHeight: "20px",
-                  paddingLeft: "12px",
-                }}
-              >
-                지구家 아파트 15개{" "}
-              </span>
-            </S.ContentTop>
-            <S.ContentBottom>
-              <S.CircleWrapper style={{ marginRight: 12 }}>
-                <S.Circle style={{ background: "#FFDC3C" }}>제</S.Circle>
-                <span>hhh</span>
-              </S.CircleWrapper>
+        {props.data?.map((el: any, idx: string) => (
+          <S.FilterItem key={idx}>
+            <S.Profile src="/images/profile.png" />
+            <S.ProfileContent>
+              <S.ContentTop>
+                {el.nickname}{" "}
+                <span
+                  style={{
+                    color: "#4498F2",
+                    fontSize: "14px",
+                    lineHeight: "20px",
+                    paddingLeft: "12px",
+                  }}
+                >
+                  지구家 아파트 {el.building_count}개{" "}
+                </span>
+              </S.ContentTop>
+              <S.ContentBottom>
+                <S.CircleWrapper style={{ marginRight: 12 }}>
+                  <S.Circle style={{ background: "#FFDC3C" }}>제</S.Circle>
+                  <span>{el.nickname}</span>
+                </S.CircleWrapper>
 
-              <S.CircleWrapper>
-                <S.Circle style={{ background: "#4498F2" }}>오</S.Circle>
-                <span>hhh</span>
-              </S.CircleWrapper>
-            </S.ContentBottom>
-          </S.ProfileContent>
-        </S.FilterItem>
+                <S.CircleWrapper>
+                  <S.Circle style={{ background: "#4498F2" }}>오</S.Circle>
+                  <span>{el.oname}</span>
+                </S.CircleWrapper>
+              </S.ContentBottom>
+            </S.ProfileContent>
+          </S.FilterItem>
+        ))}
       </S.FilterDiv>
     </S.Wrapper>
   );
