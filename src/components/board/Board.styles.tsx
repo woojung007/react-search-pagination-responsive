@@ -8,19 +8,19 @@ export const Wrapper = styled.section`
 `;
 
 export const Banner = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 300px;
-  background: url("/images/P_banner_pattern.png") no-repeat center center;
+  background: url("/images/banner_pattern.png") no-repeat center center;
   position: fixed;
   z-index: 30;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
-export const Characters = styled.div`
+export const Characters = styled.img`
   width: 560px;
   height: 300px;
-  position: absolute;
-  left: 30%;
-  background: url("/images/banner_char.png") no-repeat center center;
 `;
 
 export const TopDiv = styled.div`
@@ -52,10 +52,14 @@ export const SearchWrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+
+  @media (min-width: 360px) and (max-width: 1023px) {
+    width: 320px;
+  }
 `;
 
 export const SearchDiv = styled.div`
-  width: 400px;
+  width: 100%;
   height: 32px;
   background: #fff;
   border: 1px solid #000;
@@ -80,7 +84,7 @@ export const SearchInput = styled.input`
 `;
 
 export const Dropdown = styled.div`
-  width: 400px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   font-weight: 500;
@@ -109,10 +113,14 @@ export const FilterDiv = styled.div`
   width: 560px;
   display: flex;
   flex-direction: column;
+
+  @media (min-width: 360px) and (max-width: 1023px) {
+    width: 320px;
+  }
 `;
 
 export const FilterTop = styled.div`
-  width: 560px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -156,6 +164,7 @@ export const FilterItem = styled.div`
   border-radius: 10px;
   margin-bottom: 16px;
   display: flex;
+  justify-content: center;
   align-items: center;
 `;
 
@@ -167,20 +176,34 @@ export const Profile = styled.img`
 
 export const ProfileContent = styled.div`
   width: 100%;
+  height: 100%;
   font-weight: 700;
   font-size: 18px;
   line-height: 26px;
   letter-spacing: -0.05em;
   color: #000;
+  padding: 23px 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 export const ContentTop = styled.div`
+  width: 85%;
   font-weight: 700;
   font-size: 18px;
   line-height: 26px;
   letter-spacing: -0.05em;
   color: #000;
-  padding-bottom: 12px;
+  align-items: center;
+`;
+
+export const BuildingCount = styled.span`
+  color: #4498f2;
+  font-size: 14px;
+  line-height: 20px;
+  padding-bottom: 8px;
 `;
 
 export const ContentBottom = styled.div`

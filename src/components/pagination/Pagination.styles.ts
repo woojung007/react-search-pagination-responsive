@@ -21,17 +21,11 @@ export const Pages = styled.button`
   background-color: white;
   cursor: pointer;
   padding: 10px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: -0.05em;
 `;
-
-// export const PrevButton = styled(LeftCircleOutlined)`
-//   cursor: pointer;
-//   padding: 15px;
-// `;
-
-// export const NextButton = styled(RightCircleOutlined)`
-//   cursor: pointer;
-//   padding: 15px;
-// `;
 
 export const PrevButton = styled(LeftCircleOutlined)`
   cursor: pointer;

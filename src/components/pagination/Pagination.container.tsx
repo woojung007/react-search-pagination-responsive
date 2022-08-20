@@ -6,8 +6,6 @@ export default function PaginationPage(props: any) {
   const [current, setCurrent] = useState(1);
   const lastPage = Math.ceil(props.data?.length / 3);
 
-  console.log("lastPage", lastPage);
-
   const onClickPage = (event: MouseEvent<HTMLDivElement>) => {
     props.getData();
     setCurrent(Number((event.target as HTMLDivElement).id));

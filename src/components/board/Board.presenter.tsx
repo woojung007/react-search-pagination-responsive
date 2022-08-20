@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from "react";
-import { FiSearch } from "react-icons/fi";
+import { FiExternalLink, FiSearch } from "react-icons/fi";
 import * as S from "./Board.styles";
 import PaginationPage from "../pagination/Pagination.container";
 import FilterPage from "../filter";
@@ -19,7 +19,7 @@ export default function BoardPresenter(props: IPropsBoardPresenter) {
   return (
     <S.Wrapper>
       <S.Banner>
-        <S.Characters></S.Characters>
+        <S.Characters src="/images/banner_char.png" />
       </S.Banner>
 
       <S.TopDiv>
@@ -78,21 +78,25 @@ export default function BoardPresenter(props: IPropsBoardPresenter) {
         )}
 
         {props.data?.map((el: any, idx: string) => (
-          <S.FilterItem key={idx}>
+          <S.FilterItem
+            key={idx}
+            style={{ height: el.nickname.length >= 8 ? "118px" : "94px" }}
+          >
             <S.Profile src="/images/profile.png" />
             <S.ProfileContent>
               <S.ContentTop>
-                {el.nickname}{" "}
                 <span
                   style={{
-                    color: "#4498F2",
-                    fontSize: "14px",
-                    lineHeight: "20px",
-                    paddingLeft: "12px",
+                    paddingRight: el.nickname.length >= 8 ? 0 : "12px",
+                    display: el.nickname.length >= 8 ? "block" : "inline",
                   }}
                 >
-                  지구家 아파트 {el.building_count}개{" "}
+                  {el.nickname}
                 </span>
+
+                <S.BuildingCount>
+                  지구家 아파트 {el.building_count}개
+                </S.BuildingCount>
               </S.ContentTop>
               <S.ContentBottom>
                 <S.CircleWrapper style={{ marginRight: 12 }}>
