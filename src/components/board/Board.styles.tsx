@@ -101,12 +101,22 @@ export const Dropdown = styled.div`
   box-sizing: border-box;
 `;
 
-export const Keyword = styled.div`
+export const Word = styled.div`
   padding: 8px 24px;
   background-color: #fff;
   :hover {
     background-color: #eee;
   }
+`;
+
+interface IPropsKeyword {
+  isMatched: boolean;
+}
+
+export const Keyword = styled.span`
+  width: 100%;
+  background-color: ${(props: IPropsKeyword) =>
+    props.isMatched ? "rgb(68, 152, 242, 0.5)" : "none"};
 `;
 
 export const FilterDiv = styled.div`

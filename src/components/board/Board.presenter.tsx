@@ -1,18 +1,19 @@
 import React, { ChangeEvent } from "react";
-import { FiExternalLink, FiSearch } from "react-icons/fi";
+import { FiSearch } from "react-icons/fi";
 import * as S from "./Board.styles";
 import PaginationPage from "../pagination/Pagination.container";
 import FilterPage from "../filter";
+import { v4 as uuidv4 } from "uuid";
 
 interface IPropsBoardPresenter {
   data: any;
-  getData: () => void;
+  getData: (data: undefined | string) => void;
   onChangeKeyword: (event: ChangeEvent<HTMLInputElement>) => void;
   keyword: string;
   onClickFilterIcon: () => void;
   isFilter: boolean;
-  // onClickFilter: () => void;
-  // isClickFilter: boolean;
+  onKeyUp: (event: any) => void;
+  isSearch: boolean;
 }
 
 export default function BoardPresenter(props: IPropsBoardPresenter) {
@@ -33,16 +34,16 @@ export default function BoardPresenter(props: IPropsBoardPresenter) {
             <S.SearchInput
               placeholder="검색"
               onChange={props.onChangeKeyword}
+              onKeyUp={props.onKeyUp}
             />
             <FiSearch style={{ fontSize: 14 }} />
-            {/* <SearchIcon src="/images/search.png" /> */}
           </S.SearchDiv>
-          {props.keyword && (
+          {props.isSearch && (
             <S.Dropdown>
-              <S.Keyword>111</S.Keyword>
-              <S.Keyword>111</S.Keyword>
-              <S.Keyword>111</S.Keyword>
-              <S.Keyword>111</S.Keyword>
+              <S.Word>111</S.Word>
+              <S.Word>111</S.Word>
+              <S.Word>111</S.Word>
+              <S.Word>111</S.Word>
             </S.Dropdown>
           )}
         </S.SearchWrapper>
@@ -91,7 +92,17 @@ export default function BoardPresenter(props: IPropsBoardPresenter) {
                     display: el.nickname.length >= 8 ? "block" : "inline",
                   }}
                 >
-                  {el.nickname}
+                  {el.nickname
+                    .replaceAll(props.keyword, `#$%${props.keyword}#$%`)
+                    .split("#$%")
+                    .map((search: string) => (
+                      <S.Keyword
+                        key={uuidv4()}
+                        isMatched={props.keyword === search}
+                      >
+                        {search}
+                      </S.Keyword>
+                    ))}
                 </span>
 
                 <S.BuildingCount>
