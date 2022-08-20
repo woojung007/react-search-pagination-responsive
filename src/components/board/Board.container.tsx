@@ -7,6 +7,7 @@ export default function BoardContainer() {
   const [keyword, setKeyword] = useState("");
   const [isFilter, setIsFilter] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
+  const [count, setCount] = useState(0);
 
   // const URL =
   //   "https://raw.githubusercontent.com/jejodo-dev-team/open-api/main/frontend.json";
@@ -22,8 +23,19 @@ export default function BoardContainer() {
     }
   };
 
-  const getSearch = async (data: undefined | string) => {
+  const getSearch = async (data?: undefined | string) => {
     const URL = `http://localhost:9000/data?nickname=${data}`;
+    try {
+      const res = await fetch(URL);
+      const data = await res.json();
+      setData(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getCount = async (count?: number) => {
+    const URL = `http://localhost:9000/data?building_count=${count}`;
     try {
       const res = await fetch(URL);
       const data = await res.json();
@@ -67,6 +79,9 @@ export default function BoardContainer() {
       isFilter={isFilter}
       onKeyUp={onKeyUp}
       isSearch={isSearch}
+      getCount={getCount}
+      setCount={setCount}
+      count={count}
     />
   );
 }

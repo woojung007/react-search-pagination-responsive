@@ -2,7 +2,7 @@ import React, { ChangeEvent } from "react";
 import { FiSearch } from "react-icons/fi";
 import * as S from "./Board.styles";
 import PaginationPage from "../pagination/Pagination.container";
-import FilterPage from "../filter";
+import FilterPage from "../filter/Filter.container";
 import { v4 as uuidv4 } from "uuid";
 
 interface IPropsBoardPresenter {
@@ -14,6 +14,9 @@ interface IPropsBoardPresenter {
   isFilter: boolean;
   onKeyUp: (event: any) => void;
   isSearch: boolean;
+  getCount: (count?: number) => void;
+  setCount: any;
+  count?: number;
 }
 
 export default function BoardPresenter(props: IPropsBoardPresenter) {
@@ -55,11 +58,19 @@ export default function BoardPresenter(props: IPropsBoardPresenter) {
             <span style={{ color: "#4498F2" }}>{props.data?.length}</span>
           </S.Total>
           <S.FilterIcon
-            src="/images/filter.svg"
+            src={
+              props.isFilter ? "images/filter-active.png" : "/images/filter.svg"
+            }
             onClick={props.onClickFilterIcon}
           />
         </S.FilterTop>
-        {props.isFilter && <FilterPage />}
+        {props.isFilter && (
+          <FilterPage
+            getCount={props.getCount}
+            setCount={props.setCount}
+            count={props.count}
+          />
+        )}
 
         {props.data?.map((el: any, idx: string) => (
           <S.FilterItem

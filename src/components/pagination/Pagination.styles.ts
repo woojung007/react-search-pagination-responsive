@@ -19,20 +19,33 @@ export const PagesWrapper = styled.div`
 export const Pages = styled.button`
   border: 0;
   background-color: white;
-  cursor: pointer;
   padding: 10px;
-  font-weight: 500;
-  font-size: 12px;
+  box-sizing: border-box;
+  font-size: 14px;
   line-height: 16px;
   letter-spacing: -0.05em;
+  cursor: pointer;
 `;
+
+interface IPropsPrevBtn {
+  startPage: number;
+}
 
 export const PrevButton = styled(LeftCircleOutlined)`
   cursor: pointer;
   padding: 15px;
+  color: ${(props: IPropsPrevBtn) =>
+    props.startPage === 1 ? "#999" : "black"};
 `;
+
+interface IPropsNextBtn {
+  startPage: number;
+  lastPage: number;
+}
 
 export const NextButton = styled(RightCircleOutlined)`
   cursor: pointer;
   padding: 15px;
+  color: ${(props: IPropsNextBtn) =>
+    !(props.startPage + 3 <= props.lastPage) ? "#999" : "black"};
 `;

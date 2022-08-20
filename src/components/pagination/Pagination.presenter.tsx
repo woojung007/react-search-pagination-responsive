@@ -1,11 +1,22 @@
+import { MouseEvent } from "react";
 import * as S from "./Pagination.styles";
 
-export default function PaginationUI(props: any) {
+interface IPropsPagination {
+  onClickPage: (vent: MouseEvent<HTMLButtonElement>) => void;
+  onClickPrevPage: () => void;
+  onClickNextPage: () => void;
+  startPage: number;
+  lastPage: number;
+  current: number;
+}
+
+export default function PaginationPresenter(props: IPropsPagination) {
   return (
     <S.PagesWrapper>
       <S.PrevButton
         disabled={props.startPage === 1}
         onClick={props.onClickPrevPage}
+        startPage={props.startPage}
       />
 
       {new Array(3).fill(1).map(
@@ -14,7 +25,9 @@ export default function PaginationUI(props: any) {
             <S.Pages
               style={{
                 color:
-                  props.current === index + props.startPage ? "black" : "#666",
+                  props.current === index + props.startPage ? "black" : "#999",
+                fontWeight:
+                  props.current === index + props.startPage ? 700 : 500,
               }}
               key={index + props.startPage}
               id={String(index + props.startPage)}
@@ -27,6 +40,8 @@ export default function PaginationUI(props: any) {
       <S.NextButton
         disabled={!(props.startPage + 3 <= props.lastPage)}
         onClick={props.onClickNextPage}
+        startPage={props.startPage}
+        lastPage={props.lastPage}
       />
     </S.PagesWrapper>
   );

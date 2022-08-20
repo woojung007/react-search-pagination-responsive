@@ -1,12 +1,12 @@
 import { useState, MouseEvent } from "react";
-import PaginationUI from "./Pagination.presenter";
+import PaginationPresenter from "./Pagination.presenter";
 
 export default function PaginationPage(props: any) {
   const [startPage, setStartPage] = useState(1);
   const [current, setCurrent] = useState(1);
   const lastPage = Math.ceil(props.data?.length / 3);
 
-  const onClickPage = (event: MouseEvent<HTMLDivElement>) => {
+  const onClickPage = (event: MouseEvent<HTMLButtonElement>) => {
     props.getData();
     setCurrent(Number((event.target as HTMLDivElement).id));
   };
@@ -16,7 +16,6 @@ export default function PaginationPage(props: any) {
     setStartPage((prev) => prev - 3);
     props.getData();
     setCurrent(startPage - 3);
-    alert("prev");
   };
 
   const onClickNextPage = () => {
@@ -24,11 +23,10 @@ export default function PaginationPage(props: any) {
     setStartPage((prev) => prev + 3);
     props.getData();
     setCurrent(startPage + 3);
-    alert("next");
   };
 
   return (
-    <PaginationUI
+    <PaginationPresenter
       onClickPage={onClickPage}
       onClickPrevPage={onClickPrevPage}
       onClickNextPage={onClickNextPage}

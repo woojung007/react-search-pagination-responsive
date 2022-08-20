@@ -1,11 +1,6 @@
-import { MouseEvent, useState } from "react";
 import styled from "@emotion/styled";
 
-interface IPropsBoardStyle {
-  isClickFilter: boolean;
-}
-
-const FilterWrapper = styled.div`
+export const FilterWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -13,7 +8,7 @@ const FilterWrapper = styled.div`
   margin-bottom: 24px;
 `;
 
-const Title = styled.div`
+export const Title = styled.div`
   width: 15%;
   font-weight: 700;
   font-size: 16px;
@@ -22,12 +17,13 @@ const Title = styled.div`
   color: #000;
   padding-right: 24px;
   word-break: keep-all;
+
   @media (min-width: 360px) and (max-width: 1023px) {
     width: 20%;
   }
 `;
 
-const Filters = styled.div`
+export const Filters = styled.div`
   width: 100%;
   display: flex;
 
@@ -39,7 +35,11 @@ const Filters = styled.div`
   }
 `;
 
-const Filter = styled.div`
+interface IPropsBoardStyle {
+  isClickFilter: boolean;
+}
+
+export const Filter = styled.div`
   box-sizing: border-box;
   height: 28px;
   line-height: 20px;
@@ -68,33 +68,3 @@ const Filter = styled.div`
     margin-right: 12px;
   }
 `;
-
-export default function FilterPage() {
-  const FILTER = ["전체", "5개 이상", "4개", "3개", "2개", "1개"];
-
-  const [isClickFilter, setIsClickFilter] = useState(false);
-  const [filterId, setFilterId] = useState("");
-
-  const onClickFilter = (event: MouseEvent<HTMLDivElement>) => {
-    setIsClickFilter((prev) => !prev);
-    setFilterId((event.target as HTMLDivElement).id);
-  };
-
-  return (
-    <FilterWrapper>
-      <Title>보유 아파트</Title>
-      <Filters>
-        {FILTER.map((el, idx) => (
-          <Filter
-            key={idx}
-            onClick={onClickFilter}
-            isClickFilter={filterId === String(idx)}
-            id={String(idx)}
-          >
-            {el}
-          </Filter>
-        ))}
-      </Filters>
-    </FilterWrapper>
-  );
-}
