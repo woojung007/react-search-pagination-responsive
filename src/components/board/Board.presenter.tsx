@@ -1,9 +1,11 @@
 import React from "react";
 import { FiSearch } from "react-icons/fi";
 import * as S from "./Board.styles";
+import PaginationPage from "../pagination/Pagination.container";
 
 interface IPropsBoardPresenter {
   data: any;
+  getData: () => void;
 }
 
 export default function BoardPresenter(props: IPropsBoardPresenter) {
@@ -29,7 +31,7 @@ export default function BoardPresenter(props: IPropsBoardPresenter) {
         <S.FilterTop>
           <S.Total>
             입주민들
-            <span style={{ color: "#4498F2" }}>472</span>
+            <span style={{ color: "#4498F2" }}>{props.data?.length}</span>
           </S.Total>
           <S.FilterIcon src="/images/filter.svg" />
         </S.FilterTop>
@@ -65,6 +67,8 @@ export default function BoardPresenter(props: IPropsBoardPresenter) {
           </S.FilterItem>
         ))}
       </S.FilterDiv>
+
+      <PaginationPage data={props.data} getData={props.getData} />
     </S.Wrapper>
   );
 }
