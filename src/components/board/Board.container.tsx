@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import BoardPresenter from "./Board.presenter";
 export default function BoardContainer() {
   const [data, setData] = useState();
+  const [keyword, setKeyword] = useState("");
+  const [isFilter, setIsFilter] = useState(false);
 
   // const URL =
   //   "https://raw.githubusercontent.com/jejodo-dev-team/open-api/main/frontend.json";
@@ -23,7 +25,22 @@ export default function BoardContainer() {
     getData();
   }, []);
 
-  console.log(data);
+  const onChangeKeyword = (event: ChangeEvent<HTMLInputElement>) => {
+    setKeyword(event.target.value);
+  };
 
-  return <BoardPresenter data={data} getData={getData} />;
+  const onClickFilterIcon = () => {
+    setIsFilter((prev) => !prev);
+  };
+
+  return (
+    <BoardPresenter
+      data={data}
+      getData={getData}
+      onChangeKeyword={onChangeKeyword}
+      keyword={keyword}
+      onClickFilterIcon={onClickFilterIcon}
+      isFilter={isFilter}
+    />
+  );
 }

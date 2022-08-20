@@ -1,11 +1,18 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { FiSearch } from "react-icons/fi";
 import * as S from "./Board.styles";
 import PaginationPage from "../pagination/Pagination.container";
+import FilterPage from "../filter";
 
 interface IPropsBoardPresenter {
   data: any;
   getData: () => void;
+  onChangeKeyword: (event: ChangeEvent<HTMLInputElement>) => void;
+  keyword: string;
+  onClickFilterIcon: () => void;
+  isFilter: boolean;
+  // onClickFilter: () => void;
+  // isClickFilter: boolean;
 }
 
 export default function BoardPresenter(props: IPropsBoardPresenter) {
@@ -21,11 +28,24 @@ export default function BoardPresenter(props: IPropsBoardPresenter) {
           화섬 아파트에 입주한 입주민들입니다. <br />
           같이 화성에 가는날을 기다리며 화목하게 지내봐요!{" "}
         </S.Content>
-        <S.SearchDiv>
-          <S.SearchInput placeholder="검색" />
-          <FiSearch style={{ fontSize: 14 }} />
-          {/* <SearchIcon src="/images/search.png" /> */}
-        </S.SearchDiv>
+        <S.SearchWrapper>
+          <S.SearchDiv>
+            <S.SearchInput
+              placeholder="검색"
+              onChange={props.onChangeKeyword}
+            />
+            <FiSearch style={{ fontSize: 14 }} />
+            {/* <SearchIcon src="/images/search.png" /> */}
+          </S.SearchDiv>
+          {props.keyword && (
+            <S.Dropdown>
+              <S.Keyword>111</S.Keyword>
+              <S.Keyword>111</S.Keyword>
+              <S.Keyword>111</S.Keyword>
+              <S.Keyword>111</S.Keyword>
+            </S.Dropdown>
+          )}
+        </S.SearchWrapper>
       </S.TopDiv>
       <S.FilterDiv>
         <S.FilterTop>
@@ -33,8 +53,30 @@ export default function BoardPresenter(props: IPropsBoardPresenter) {
             입주민들
             <span style={{ color: "#4498F2" }}>{props.data?.length}</span>
           </S.Total>
-          <S.FilterIcon src="/images/filter.svg" />
+          <S.FilterIcon
+            src="/images/filter.svg"
+            onClick={props.onClickFilterIcon}
+          />
         </S.FilterTop>
+        {props.isFilter && (
+          <S.FilterWrapper>
+            <span
+              style={{
+                fontWeight: 700,
+                fontSize: "16px",
+                lineHeight: "24px",
+                letterSpacing: "-0.05em",
+                color: "#000",
+                paddingRight: "24px",
+              }}
+            >
+              보유아파트
+            </span>
+
+            <FilterPage />
+          </S.FilterWrapper>
+        )}
+
         {props.data?.map((el: any, idx: string) => (
           <S.FilterItem key={idx}>
             <S.Profile src="/images/profile.png" />

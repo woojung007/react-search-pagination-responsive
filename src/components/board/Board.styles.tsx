@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 
 export const Wrapper = styled.section`
   width: 100vw;
-  background-color: aliceblue;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,6 +12,7 @@ export const Banner = styled.div`
   height: 300px;
   background: url("/images/P_banner_pattern.png") no-repeat center center;
   position: fixed;
+  z-index: 30;
 `;
 
 export const Characters = styled.div`
@@ -25,7 +25,6 @@ export const Characters = styled.div`
 
 export const TopDiv = styled.div`
   padding-top: 350px;
-  background-color: aliceblue;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -48,6 +47,13 @@ export const Content = styled.p`
   padding: 20px 0 48px 0;
 `;
 
+export const SearchWrapper = styled.div`
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+`;
+
 export const SearchDiv = styled.div`
   width: 400px;
   height: 32px;
@@ -56,20 +62,47 @@ export const SearchDiv = styled.div`
   border-radius: 20px;
   padding: 0 12px 0 24px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 56px;
+  z-index: 10;
+  box-sizing: border-box;
 `;
 
 export const SearchInput = styled.input`
-  width: 380px;
+  width: 90%;
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
   letter-spacing: -0.05em;
-  color: #999;
   border: none;
   outline: none;
+`;
+
+export const Dropdown = styled.div`
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.05em;
+  color: #000;
+  background: #fff;
+  border: 1px solid #000;
+  border-radius: 0px 0px 15px 15px;
+  padding: 16px 4px;
+  position: absolute;
+  top: 16px;
+  box-sizing: border-box;
+`;
+
+export const Keyword = styled.div`
+  padding: 8px 24px;
+  background-color: #fff;
+  :hover {
+    background-color: #eee;
+  }
 `;
 
 export const FilterDiv = styled.div`
@@ -84,6 +117,13 @@ export const FilterTop = styled.div`
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #000;
+  margin-bottom: 24px;
+`;
+
+export const FilterWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
   margin-bottom: 24px;
 `;
 
