@@ -3,10 +3,10 @@ import * as S from "./Pagination.styles";
 
 interface IPropsPagination {
   onClickPage: (vent: MouseEvent<HTMLButtonElement>) => void;
-  onClickPrevPage: () => void;
-  onClickNextPage: () => void;
-  startPage: number;
-  lastPage: number;
+  onClickPrevPage: (event: any) => void;
+  onClickNextPage: (event: any) => void;
+  startpage: number;
+  lastpage: number;
   current: number;
 }
 
@@ -14,34 +14,35 @@ export default function PaginationPresenter(props: IPropsPagination) {
   return (
     <S.PagesWrapper>
       <S.PrevButton
-        disabled={props.startPage === 1}
+        disabled={props.startpage === 1}
         onClick={props.onClickPrevPage}
-        startPage={props.startPage}
+        startpage={props.startpage}
       />
 
       {new Array(3).fill(1).map(
         (_, index) =>
-          index + props.startPage <= props.lastPage && (
+          index + props.startpage <= props.lastpage && (
             <S.Pages
               style={{
                 color:
-                  props.current === index + props.startPage ? "black" : "#999",
+                  props.current === index + props.startpage ? "black" : "#999",
                 fontWeight:
-                  props.current === index + props.startPage ? 700 : 500,
+                  props.current === index + props.startpage ? 700 : 500,
               }}
-              key={index + props.startPage}
-              id={String(index + props.startPage)}
+              key={index + props.startpage}
+              id={String(index + props.startpage)}
               onClick={props.onClickPage}
             >
-              {index + props.startPage}
+              {index + props.startpage}
             </S.Pages>
           )
       )}
+
       <S.NextButton
-        disabled={!(props.startPage + 3 <= props.lastPage)}
+        disabled={!(props.startpage + 3 <= props.lastpage)}
         onClick={props.onClickNextPage}
-        startPage={props.startPage}
-        lastPage={props.lastPage}
+        startpage={props.startpage}
+        lastpage={props.lastpage}
       />
     </S.PagesWrapper>
   );

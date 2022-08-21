@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 
 interface IPropsBoardPresenter {
   data: any;
-  getData: (data: undefined | string) => void;
+  getData: () => void;
   onChangeKeyword: (event: ChangeEvent<HTMLInputElement>) => void;
   keyword: string;
   onClickFilterIcon: () => void;
@@ -24,6 +24,7 @@ interface IPropsBoardPresenter {
     }
   ];
   onClickWord: (event: any) => void;
+  setData: any;
 }
 
 export default function BoardPresenter(props: IPropsBoardPresenter) {
@@ -131,7 +132,7 @@ export default function BoardPresenter(props: IPropsBoardPresenter) {
         ))}
       </S.FilterDiv>
 
-      <PaginationPage data={props.data} getData={props.getData} />
+      <PaginationPage setData={props.setData} />
     </S.Wrapper>
   );
 }

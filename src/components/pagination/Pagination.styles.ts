@@ -28,24 +28,24 @@ export const Pages = styled.button`
 `;
 
 interface IPropsPrevBtn {
-  startPage: number;
+  startpage: number;
 }
 
 export const PrevButton = styled(LeftCircleOutlined)`
   cursor: pointer;
   padding: 15px;
   color: ${(props: IPropsPrevBtn) =>
-    props.startPage === 1 ? "#999" : "black"};
+    props.startpage === 1 ? "#999" : "black"};
 `;
 
 interface IPropsNextBtn {
-  startPage: number;
-  lastPage: number;
+  startpage: number;
+  lastpage: number;
 }
 
 export const NextButton = styled(RightCircleOutlined)`
   cursor: pointer;
   padding: 15px;
   color: ${(props: IPropsNextBtn) =>
-    !(props.startPage + 3 <= props.lastPage) ? "#999" : "black"};
+    !(props.startpage + 3 <= props.lastpage) ? "#999" : "black"};
 `;

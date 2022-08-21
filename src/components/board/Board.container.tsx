@@ -19,7 +19,7 @@ export default function BoardContainer() {
   //   "https://raw.githubusercontent.com/jejodo-dev-team/open-api/main/frontend.json";
 
   const getData = async () => {
-    const URL = `http://localhost:9000/data`;
+    const URL = "http://localhost:9000/data?_page=1";
     try {
       const res = await fetch(URL);
       const data = await res.json();
@@ -44,6 +44,7 @@ export default function BoardContainer() {
     let URL;
     if (count === 6) {
       return getData();
+      // URL = "http://localhost:9000/data?_page=1";
     }
     if (count === 5) {
       URL = "http://localhost:9000/data?&building_count_gte=5";
@@ -77,14 +78,12 @@ export default function BoardContainer() {
 
   const getDebounce = _.debounce((data) => {
     getSearch(data);
-    // setKeyword(data);
     getWord(data);
   }, 200);
 
   const onKeyUp = (event: any) => {
     if (event.keyCode === 13) {
       setIsSearch(false);
-      // getSearch(event.target.value);
     }
   };
 
@@ -92,7 +91,6 @@ export default function BoardContainer() {
     getDebounce(event.target.value);
     setKeyword(event.currentTarget.value);
     setIsSearch(true);
-    // getWord(event.target.value);
   };
 
   const onClickWord = (event: any) => {
@@ -120,6 +118,7 @@ export default function BoardContainer() {
       count={count}
       word={word}
       onClickWord={onClickWord}
+      setData={setData}
     />
   );
 }
