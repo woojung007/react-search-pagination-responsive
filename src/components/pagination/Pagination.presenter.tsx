@@ -2,7 +2,7 @@ import { MouseEvent } from "react";
 import * as S from "./Pagination.styles";
 
 interface IPropsPagination {
-  onClickPage: (vent: MouseEvent<HTMLButtonElement>) => void;
+  onClickPage: (event: MouseEvent<HTMLButtonElement>) => void;
   onClickPrevPage: (event: any) => void;
   onClickNextPage: (event: any) => void;
   startpage: number;

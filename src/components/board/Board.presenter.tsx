@@ -6,7 +6,9 @@ import FilterPage from "../filter/Filter.container";
 import { v4 as uuidv4 } from "uuid";
 
 interface IPropsBoardPresenter {
-  data: any;
+  data?: any;
+  allData?: any;
+  setAllData: any;
   getData: () => void;
   onChangeKeyword: (event: ChangeEvent<HTMLInputElement>) => void;
   keyword: string;
@@ -14,7 +16,7 @@ interface IPropsBoardPresenter {
   isFilter: boolean;
   onKeyUp: (event: any) => void;
   isSearch: boolean;
-  getCount: (count?: number) => void;
+  getCount: (count: number) => void;
   setCount: any;
   count?: number;
   word?: [
@@ -25,6 +27,9 @@ interface IPropsBoardPresenter {
   ];
   onClickWord: (event: any) => void;
   setData: any;
+  getAllData: () => void;
+  getPage: (page: number) => void;
+  total: number;
 }
 
 export default function BoardPresenter(props: IPropsBoardPresenter) {
@@ -67,7 +72,15 @@ export default function BoardPresenter(props: IPropsBoardPresenter) {
         <S.FilterTop>
           <S.Total>
             입주민들
-            <span style={{ color: "#4498F2" }}>{props.data?.length}</span>
+            <span style={{ color: "#4498F2" }}>
+              {
+                // props.data?.length > 10
+                //   ?
+                // props.allData?.length
+                props.total
+                // : props.data?.length
+              }
+            </span>
           </S.Total>
           <S.FilterIcon
             src={
@@ -82,6 +95,7 @@ export default function BoardPresenter(props: IPropsBoardPresenter) {
             setCount={props.setCount}
             count={props.count}
             data={props.data}
+            allData={props.allData}
           />
         )}
 
@@ -132,7 +146,13 @@ export default function BoardPresenter(props: IPropsBoardPresenter) {
         ))}
       </S.FilterDiv>
 
-      <PaginationPage setData={props.setData} />
+      <PaginationPage
+        setData={props.setData}
+        data={props.data}
+        allData={props.allData}
+        getAllData={props.getAllData}
+        getPage={props.getPage}
+      />
     </S.Wrapper>
   );
 }

@@ -1,6 +1,8 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import BoardPresenter from "./Board.presenter";
 import _ from "lodash";
+import { useRecoilState } from "recoil";
+import { totalState, currentPage, countState } from "../../store/recoil";
 
 interface word {
   word: string;
@@ -8,22 +10,41 @@ interface word {
 }
 
 export default function BoardContainer() {
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
+  const [allData, setAllData] = useState([]);
   const [keyword, setKeyword] = useState("");
   const [isFilter, setIsFilter] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
   const [word, setWord] = useState();
+  const [total, setTotal] = useRecoilState(totalState);
+  const [current] = useRecoilState(currentPage);
+  const [count, setCount] = useRecoilState(countState);
 
   // const URL =
   //   "https://raw.githubusercontent.com/jejodo-dev-team/open-api/main/frontend.json";
 
+  const getAllData = async () => {
+    try {
+      const URL = "http://localhost:9000/data";
+      const res = await fetch(URL);
+      const data = await res.json();
+      setAllData(data);
+      setTotal(data.length);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const getData = async () => {
     const URL = "http://localhost:9000/data?_page=1";
+    setTotal(allData.length);
     try {
       const res = await fetch(URL);
       const data = await res.json();
       setData(data);
+      getAllData();
+      setTotal(allData.length);
     } catch (error) {
       console.log(error);
     }
@@ -35,19 +56,19 @@ export default function BoardContainer() {
       const res = await fetch(URL);
       const data = await res.json();
       setData(data);
+      setTotal(data.length);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const getCount = async (count?: number) => {
+  const getCount = async (count: number) => {
     let URL;
     if (count === 6) {
       return getData();
-      // URL = "http://localhost:9000/data?_page=1";
     }
     if (count === 5) {
-      URL = "http://localhost:9000/data?&building_count_gte=5";
+      URL = "http://localhost:9000/data?building_count_gte=5";
     } else {
       URL = `http://localhost:9000/data?building_count=${count}`;
     }
@@ -56,10 +77,32 @@ export default function BoardContainer() {
       const res = await fetch(URL);
       const data = await res.json();
       setData(data);
+      setAllData(data);
+      setTotal(data.length);
     } catch (error) {
       console.log(error);
     }
   };
+
+  // const getFilterPage = async (count: number) => {
+  //   let URL: any;
+  //   if (count === 6) {
+  //     return getData();
+  //   }
+  //   if (allData?.length > 10 && count === 5) {
+  //     URL = "http://localhost:9000/data?_page=1building_count_gte=5";
+  //   } else {
+  //     URL = `http://localhost:9000/data?_page=1?&building_count=${count}`;
+  //   }
+
+  //   try {
+  //     const res = await fetch(URL);
+  //     const data = await res.json();
+  //     setAllData(data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const getWord = async (word?: string) => {
     const URL = `http://localhost:9000/search?q=${word}`;
@@ -74,7 +117,33 @@ export default function BoardContainer() {
 
   useEffect(() => {
     getData();
+    getAllData();
   }, []);
+
+  useEffect(() => {
+    getPage(current);
+  }, [current]);
+
+  const getPage = async (page: number) => {
+    let URL;
+    if (count === 6) {
+      URL = `http://localhost:9000/data?_page=${page}`;
+    }
+    if (allData?.length > 10 && count === 5) {
+      URL = `http://localhost:9000/data?_page=${page}?building_count_gte=5`;
+    } else {
+      URL = `http://localhost:9000/data?_page=${page}?building_count=${count}`;
+      // URL = `http://localhost:9000/data?_page=${page}`;
+    }
+
+    try {
+      const res = await fetch(URL);
+      const data = await res.json();
+      setData(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const getDebounce = _.debounce((data) => {
     getSearch(data);
@@ -106,6 +175,8 @@ export default function BoardContainer() {
   return (
     <BoardPresenter
       data={data}
+      allData={allData}
+      setAllData={setAllData}
       getData={getData}
       onChangeKeyword={onChangeKeyword}
       keyword={keyword}
@@ -119,6 +190,9 @@ export default function BoardContainer() {
       word={word}
       onClickWord={onClickWord}
       setData={setData}
+      getAllData={getAllData}
+      getPage={getPage}
+      total={total}
     />
   );
 }
