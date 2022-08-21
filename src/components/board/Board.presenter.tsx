@@ -69,6 +69,7 @@ export default function BoardPresenter(props: IPropsBoardPresenter) {
             getCount={props.getCount}
             setCount={props.setCount}
             count={props.count}
+            data={props.data}
           />
         )}
 

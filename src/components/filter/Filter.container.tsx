@@ -9,24 +9,11 @@ interface IPropsFilterContainer {
 }
 
 export default function FilterContainer(props: IPropsFilterContainer) {
-  const [isClickFilter, setIsClickFilter] = useState(false);
-  const [filterId, setFilterId] = useState("0");
+  const [filterId, setFilterId] = useState("");
 
   const onClickFilter = (event: MouseEvent<HTMLDivElement>) => {
-    setIsClickFilter((prev) => !prev);
     setFilterId((event.target as HTMLDivElement).id);
-
-    props.setCount(Number(filterId));
-    props.getCount(props.count);
-
-    console.log(
-      "filterId",
-      filterId,
-      "event.target.id",
-      (event.target as HTMLDivElement).id,
-      "count",
-      props.count
-    );
+    props.getCount(Number((event.target as HTMLDivElement).id));
   };
 
   return <FilterPresenter onClickFilter={onClickFilter} filterId={filterId} />;

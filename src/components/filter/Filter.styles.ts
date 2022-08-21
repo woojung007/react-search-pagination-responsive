@@ -26,17 +26,20 @@ export const Title = styled.div`
 export const Filters = styled.div`
   width: 100%;
   display: flex;
+  flex-direction: row-reverse;
 
   @media (min-width: 360px) and (max-width: 1023px) {
     width: 70%;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
+    flex-wrap: wrap-reverse;
   }
 `;
 
+export const All = styled.div``;
+
 interface IPropsBoardStyle {
-  isClickFilter: boolean;
+  isActive: boolean;
 }
 
 export const Filter = styled.div`
@@ -49,19 +52,16 @@ export const Filter = styled.div`
   margin-right: 24px;
   padding: 4px 12px;
 
-  font-weight: ${(props: IPropsBoardStyle) =>
-    props.isClickFilter ? 700 : 500};
+  font-weight: ${(props: IPropsBoardStyle) => (props.isActive ? 700 : 500)};
 
   background-color: ${(props: IPropsBoardStyle) =>
-    props.isClickFilter ? "black" : "#fff"};
+    props.isActive ? "black" : "#fff"};
 
-  color: ${(props: IPropsBoardStyle) =>
-    props.isClickFilter ? "#fff" : "#999"};
+  color: ${(props: IPropsBoardStyle) => (props.isActive ? "#fff" : "#999")};
 
   cursor: pointer;
   :hover {
-    color: ${(props: IPropsBoardStyle) =>
-      props.isClickFilter ? "#fff" : "black"};
+    color: ${(props: IPropsBoardStyle) => (props.isActive ? "#fff" : "black")};
   }
 
   @media (min-width: 360px) and (max-width: 1023px) {
