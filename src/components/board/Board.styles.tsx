@@ -124,6 +124,7 @@ export const Dropdown = styled.div`
 export const Word = styled.div`
   padding: 8px 24px;
   background-color: #fff;
+  cursor: pointer;
   :hover {
     background-color: #eee;
   }

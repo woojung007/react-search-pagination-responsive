@@ -17,6 +17,13 @@ interface IPropsBoardPresenter {
   getCount: (count?: number) => void;
   setCount: any;
   count?: number;
+  word?: [
+    {
+      word: string;
+      count: number;
+    }
+  ];
+  onClickWord: (event: any) => void;
 }
 
 export default function BoardPresenter(props: IPropsBoardPresenter) {
@@ -38,15 +45,19 @@ export default function BoardPresenter(props: IPropsBoardPresenter) {
               placeholder="검색"
               onChange={props.onChangeKeyword}
               onKeyUp={props.onKeyUp}
+              value={props.keyword}
             />
             <FiSearch style={{ fontSize: 14 }} />
           </S.SearchDiv>
-          {props.isSearch && (
+          {props.isSearch && props.keyword && (
             <S.Dropdown>
-              <S.Word>111</S.Word>
-              <S.Word>111</S.Word>
-              <S.Word>111</S.Word>
-              <S.Word>111</S.Word>
+              {props.word?.map((el) => (
+                <div key={uuidv4()}>
+                  <S.Word onClick={props.onClickWord} id={el.word}>
+                    {el.word}
+                  </S.Word>
+                </div>
+              ))}
             </S.Dropdown>
           )}
         </S.SearchWrapper>
@@ -73,9 +84,9 @@ export default function BoardPresenter(props: IPropsBoardPresenter) {
           />
         )}
 
-        {props.data?.map((el: any, idx: string) => (
+        {props.data?.map((el: any) => (
           <S.FilterItem
-            key={idx}
+            key={uuidv4()}
             style={{ height: el.nickname.length >= 8 ? "118px" : "94px" }}
           >
             <S.Profile src="/images/profile.png" />

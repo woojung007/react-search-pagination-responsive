@@ -31,8 +31,8 @@
       "building_count": 5
     },
     {
-      "nickname": "이름",
-      "oname": "이름",
+      "nickname": "차차 목장",
+      "oname": "목장",
       "building_count": 5
     },
     {
@@ -99,6 +99,44 @@
       "nickname": "이름",
       "oname": "이름",
       "building_count": 1
+    }
+  ],
+  "search": [
+    {
+      "word": "제조도",
+      "count": 30
+    },
+    {
+      "word": "차차 목장",
+      "count": 90
+    },
+    {
+      "word": "소잃고뇌약간고침",
+      "count": 80
+    },
+    {
+      "word": "차차",
+      "count": 8
+    },
+    {
+      "word": "이름",
+      "count": 3
+    },
+    {
+      "word": "성희",
+      "count": 3
+    },
+    {
+      "word": "목하",
+      "count": 3
+    },
+    {
+      "word": "AI",
+      "count": 3
+    },
+    {
+      "word": "공인즙개사",
+      "count": 3
     }
   ]
 }
