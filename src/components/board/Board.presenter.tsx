@@ -21,6 +21,7 @@ interface IPropsBoardPresenter {
     {
       word: string;
       count: number;
+      id: string;
     }
   ];
   onClickWord: (event: any) => void;
@@ -49,7 +50,7 @@ export default function BoardPresenter(props: IPropsBoardPresenter) {
               placeholder="검색"
               onChange={props.onChangeKeyword}
               onKeyUp={props.onKeyUp}
-              value={props.keyword}
+              value={props.keyword || ""}
             />
             <FiSearch style={{ fontSize: 14 }} />
           </S.SearchDiv>

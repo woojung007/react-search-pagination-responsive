@@ -1,14 +1,9 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import BoardPresenter from "./Board.presenter";
-import _ from "lodash";
+import _, { rest } from "lodash";
 import { useRecoilState } from "recoil";
-import { allDataState, dataState } from "../../store/recoil";
-import {
-  totalState,
-  currentPage,
-  countState,
-  filterIdState,
-} from "../../store/recoil";
+import { v4 as uuidv4 } from "uuid";
+import { totalState, currentPage, countState } from "../../store/recoil";
 
 interface word {
   word: string;
@@ -16,34 +11,24 @@ interface word {
 }
 
 export default function BoardContainer() {
-  // const [data, setData] = useState([]);
-  // const [allData, setAllData] = useState([]);
-  const [data, setData] = useRecoilState(dataState);
-  const [allData, setAllData] = useRecoilState(allDataState);
+  const [data, setData] = useState([]);
+  const [allData, setAllData] = useState([]);
+  // const [data, setData] = useRecoilState(dataState);
+  // const [allData, setAllData] = useRecoilState(allDataState);
   const [keyword, setKeyword] = useState("");
   const [isFilter, setIsFilter] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
-  // const [count, setCount] = useState(0);
+  const [keywordCount, setKeywordCount] = useState(1);
+  // const [id, setId] = useState(1);
   const [word, setWord] = useState();
   const [total, setTotal] = useRecoilState(totalState);
   const [current] = useRecoilState(currentPage);
   const [count, setCount] = useRecoilState(countState);
+
   // const [filterId, setFilterId] = useRecoilState(filterIdState);
 
   // const URL =
   //   "https://raw.githubusercontent.com/jejodo-dev-team/open-api/main/frontend.json";
-
-  // @ 1. total이 안나옴 (allData로 set해주고 total을 set 해줘야 함) => 함수 호출이 너무 많이 됌
-  // 2. 5개 이상 필터를 눌렀을 때 한페이지에 모든 데이터가(14개) 나옴
-  // => 2페이지 내용에 전체 2페이지가 나옴
-  // => 검색하고나서도 모든 데이터가 한페이지에 나옴
-
-  // @ 3. 전체에서 페이지네이션 작동이 이상함 /// 어떤 페이지든 두 번 클릭하면 데이터가 변경됌
-  // @ 4. 필터 켰을 때 전체에 isActive 되어있게 설정하기
-  // @ 5. 전체 "필터" 눌렀을 때 2페이지가 안불러와짐
-
-  // 페이지네이션 ? 전체페이지 & 필터된 페이지
-  // 전체페이지 ? => current === 6 이거나 isFilter가 일어나지 않을 때
 
   const URL = "http://localhost:9000";
 
@@ -134,9 +119,9 @@ export default function BoardContainer() {
   };
 
   const getWord = async (word?: string) => {
-    // const URL = `http://localhost:9000/search?q=${word}`;
+    const URL = `http://localhost:9000/search?_sort=count&q=${word}`;
     try {
-      const res = await fetch(`${URL}/search?_sort=count&q=${word}`);
+      const res = await fetch(URL);
       const data = await res.json();
       setWord(data.sort((a: word, b: word) => b.count - a.count));
       // setWord(data);
@@ -160,40 +145,63 @@ export default function BoardContainer() {
     setIsSearch(true);
   };
 
-  // 1. 엔터쳤을 때 키워드를 추가
-  // 2. 원래 있던 키워드라면 count up!
-  // axios({
-  //   url: 'http://localhost:4000/posts',
-  //   method: 'POST',
-  //   data: form,
-  // }).then(({ data }) => setPosts((prev) => [...prev, data]));
+  const keywordData = { id: uuidv4(), word: keyword, count: 1 };
 
-  const onKeyUp = async (event: any) => {
+  const onKeyUp = (event: any) => {
     if (event.keyCode === 13) {
+      event.preventDefault();
+      const postData = async () => {
+        const URL = "http://localhost:9000/search";
+        try {
+          const response = await fetch(URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json; charset=UTF-8" },
+            body: JSON.stringify(keywordData),
+          });
+          await response.json();
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      postData();
       getWord(event.target.value);
       setIsSearch((prev) => !prev);
-    }
-
-    const data = { word: keyword, count: 1 };
-    try {
-      const response = await fetch("http://localhost:9000/search", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      console.log("response", response);
-      const res = await response.json();
-      console.log(res);
-    } catch (error) {
-      console.log(error);
     }
   };
 
   const onClickWord = (event: any) => {
     getSearchData(event.target.id);
     setKeyword(event.target.id);
-    getWord(event.target.value);
+    getWord(event.target.id);
     setIsSearch(false);
+    setKeywordCount((prev) => prev + 1);
+
+    if (word) {
+      const putData = async () => {
+        try {
+          const res = await fetch(
+            `http://localhost:9000/search?word=${keyword}`,
+            {
+              method: "PUT",
+              body: JSON.stringify({
+                id: uuidv4(),
+                word: keyword,
+                count: keywordCount,
+              }),
+              headers: {
+                "Content-type": "application/json",
+              },
+            }
+          );
+          await res.json();
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      putData();
+    }
   };
 
   const onClickFilterIcon = () => {

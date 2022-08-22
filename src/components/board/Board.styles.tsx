@@ -105,7 +105,9 @@ export const SearchInput = styled.input`
 
 export const Dropdown = styled.div`
   width: 100%;
-  height: 172px;
+  height: auto;
+  max-height: 172px;
+  overflow: scroll;
   display: flex;
   flex-direction: column;
   font-weight: 500;
@@ -120,7 +122,6 @@ export const Dropdown = styled.div`
   position: absolute;
   top: 16px;
   box-sizing: border-box;
-  overflow: scroll;
 `;
 
 export const Word = styled.div`
@@ -185,6 +186,7 @@ export const FilterIcon = styled.img`
 export const FilterItem = styled.div`
   width: 100%;
   height: 94px;
+  box-sizing: border-box;
   background: #fff;
   border: 1px solid #000;
   border-radius: 10px;
