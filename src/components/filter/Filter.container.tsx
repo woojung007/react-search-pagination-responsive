@@ -1,28 +1,27 @@
-import { MouseEvent, useState } from "react";
+import { MouseEvent } from "react";
 import FilterPresenter from "./Filter.presenter";
 import { useRecoilState } from "recoil";
-import { countState, currentPage } from "../../store/recoil";
+import { countState, currentPage, filterIdState } from "../../store/recoil";
 
 interface IPropsFilterContainer {
   data?: any;
-  getCount: (count: number) => void;
-  setCount: any;
-  count?: number;
+  getFilterData: (filterCount: number) => void;
   allData: any;
+  getPage: any;
 }
 
 export default function FilterContainer(props: IPropsFilterContainer) {
-  const [filterId, setFilterId] = useState("");
-  const [, setCount] = useRecoilState(countState);
-  const [, setCurrent] = useRecoilState(currentPage);
+  // const [filterId, setFilterId] = useRecoilState(filterIdState);
+  const [count, setCount] = useRecoilState(countState);
+  const [current, setCurrent] = useRecoilState(currentPage);
 
   const onClickFilter = (event: MouseEvent<HTMLDivElement>) => {
-    const target = (event.target as HTMLDivElement).id;
-    setFilterId(target);
-    props.getCount(Number(target));
-    setCount(Number(target));
+    const target = Number((event.target as HTMLDivElement).id);
+    // setFilterId(target);
+    setCount(target);
+    props.getFilterData(target);
     setCurrent(1);
   };
 
-  return <FilterPresenter onClickFilter={onClickFilter} filterId={filterId} />;
+  return <FilterPresenter count={count} onClickFilter={onClickFilter} />;
 }

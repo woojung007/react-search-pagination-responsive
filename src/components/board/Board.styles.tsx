@@ -105,6 +105,7 @@ export const SearchInput = styled.input`
 
 export const Dropdown = styled.div`
   width: 100%;
+  height: 172px;
   display: flex;
   flex-direction: column;
   font-weight: 500;
@@ -119,6 +120,7 @@ export const Dropdown = styled.div`
   position: absolute;
   top: 16px;
   box-sizing: border-box;
+  overflow: scroll;
 `;
 
 export const Word = styled.div`

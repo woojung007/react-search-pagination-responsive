@@ -9,21 +9,21 @@ interface IPropsPagination {
   allData?: any;
   getAllData: () => void;
   getPage: (page: number) => void;
+  getFilterData: any;
 }
 
 export default function PaginationPage(props: IPropsPagination) {
   const [total] = useRecoilState(totalState);
-  const [current, setCurrent] = useRecoilState(currentPage);
   const [startpage, setStartpage] = useState(1);
   // const [current, setCurrent] = useState(1);
+  const [current, setCurrent] = useRecoilState(currentPage);
+  const [count, setCount] = useRecoilState(countState);
   const lastpage = Math.ceil(total / 10);
-
-  // URL = "http://localhost:9000/data?&building_count_gte=5";
 
   const onClickPage = (event: MouseEvent<HTMLButtonElement>) => {
     const target = Number((event.target as HTMLDivElement).id);
     setCurrent(target);
-    props.getPage(current);
+    props.getFilterData(count);
   };
 
   const onClickPrevPage = (event: any) => {

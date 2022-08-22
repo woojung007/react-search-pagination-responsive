@@ -16,9 +16,7 @@ interface IPropsBoardPresenter {
   isFilter: boolean;
   onKeyUp: (event: any) => void;
   isSearch: boolean;
-  getCount: (count: number) => void;
-  setCount: any;
-  count?: number;
+  getFilterData: (filterCount: number) => void;
   word?: [
     {
       word: string;
@@ -72,15 +70,7 @@ export default function BoardPresenter(props: IPropsBoardPresenter) {
         <S.FilterTop>
           <S.Total>
             입주민들
-            <span style={{ color: "#4498F2" }}>
-              {
-                // props.data?.length > 10
-                //   ?
-                // props.allData?.length
-                props.total
-                // : props.data?.length
-              }
-            </span>
+            <span style={{ color: "#4498F2" }}>{props.total}</span>
           </S.Total>
           <S.FilterIcon
             src={
@@ -91,11 +81,10 @@ export default function BoardPresenter(props: IPropsBoardPresenter) {
         </S.FilterTop>
         {props.isFilter && (
           <FilterPage
-            getCount={props.getCount}
-            setCount={props.setCount}
-            count={props.count}
+            getFilterData={props.getFilterData}
             data={props.data}
             allData={props.allData}
+            getPage={props.getPage}
           />
         )}
 
@@ -152,6 +141,7 @@ export default function BoardPresenter(props: IPropsBoardPresenter) {
         allData={props.allData}
         getAllData={props.getAllData}
         getPage={props.getPage}
+        getFilterData={props.getFilterData}
       />
     </S.Wrapper>
   );

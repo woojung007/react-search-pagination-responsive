@@ -3,7 +3,7 @@ import * as S from "./Filter.styles";
 
 interface IPropsFilterPresenter {
   onClickFilter: (event: MouseEvent<HTMLDivElement>) => void;
-  filterId: string;
+  count: number;
 }
 
 export default function FilterPresenter(props: IPropsFilterPresenter) {
@@ -14,15 +14,14 @@ export default function FilterPresenter(props: IPropsFilterPresenter) {
       <S.Title>보유 아파트</S.Title>
       <S.Filters>
         {FILTER.map((el, idx) => (
-          <Fragment key={idx}>
-            <S.Filter
-              onClick={props.onClickFilter}
-              isActive={props.filterId === String(idx + 1)}
-              id={String(idx + 1)}
-            >
-              {el}
-            </S.Filter>
-          </Fragment>
+          <S.Filter
+            key={idx}
+            onClick={props.onClickFilter}
+            isActive={props.count === idx + 1}
+            id={String(idx + 1)}
+          >
+            {el}
+          </S.Filter>
         ))}
       </S.Filters>
     </S.FilterWrapper>
