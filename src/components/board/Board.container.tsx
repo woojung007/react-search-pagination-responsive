@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 import BoardPresenter from "./Board.presenter";
 import _ from "lodash";
 import { useRecoilState } from "recoil";
@@ -16,7 +16,6 @@ export default function BoardContainer() {
   const [isFilter, setIsFilter] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
   const [id, setId] = useState();
-  // const [keywordCount, setKeywordCount] = useState(1);
   const [word, setWord] = useState();
   const [total, setTotal] = useRecoilState(totalState);
   const [current] = useRecoilState(currentPage);
@@ -134,33 +133,32 @@ export default function BoardContainer() {
     setIsSearch(true);
   };
 
-  const onKeyUp = (event: any) => {
+  const onKeyUp = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.keyCode === 13) {
-      event.preventDefault();
-      setId((prev: any) => prev + 1);
-      const keywordData = {
-        id: id,
-        word: keyword,
-        count: 1,
-      };
-
-      const postData = async () => {
-        const URL = "http://localhost:9000/search";
-        try {
-          const response = await fetch(URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json; charset=UTF-8" },
-            body: JSON.stringify(keywordData),
-          });
-          await response.json();
-          getWord(event.target.value);
-          setIsSearch((prev) => !prev);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-
-      postData();
+      // event.preventDefault();
+      // setId((prev: any) => prev + 1);
+      // const keywordData = {
+      //   id: id,
+      //   word: keyword,
+      //   count: 1,
+      // };
+      // const postData = async () => {
+      //   const URL = "http://localhost:9000/search";
+      //   try {
+      //     const response = await fetch(URL, {
+      //       method: "POST",
+      //       headers: { "Content-Type": "application/json; charset=UTF-8" },
+      //       body: JSON.stringify(keywordData),
+      //     });
+      //     await response.json();
+      //     getWord((event.target as HTMLInputElement).value);
+      //     setIsSearch((prev) => !prev);
+      //   } catch (error) {
+      //     console.log(error);
+      //   }
+      // };
+      // postData();
+      getWord((event.target as HTMLInputElement).value);
     }
   };
 

@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, KeyboardEvent } from "react";
 import { FiSearch } from "react-icons/fi";
 import * as S from "./Board.styles";
 import PaginationPage from "../pagination/Pagination.container";
@@ -14,7 +14,7 @@ interface IPropsBoardPresenter {
   keyword: string;
   onClickFilterIcon: () => void;
   isFilter: boolean;
-  onKeyUp: (event: any) => void;
+  onKeyUp: (event: KeyboardEvent<HTMLInputElement>) => void;
   isSearch: boolean;
   getFilterData: (filterCount: number) => void;
   word?: [
