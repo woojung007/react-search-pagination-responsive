@@ -99,7 +99,8 @@ https://user-images.githubusercontent.com/99471927/186070675-a8bdce21-4fdb-4080-
 
 https://user-images.githubusercontent.com/99471927/186071503-d2598e55-c267-4302-91a5-17021716ecb6.mov
 
-시작 페이지는 `state`를 사용, 현재 페이지는 `recoil`을 사용해서 전역으로 상태 관리가 가능하도록 설정해주었고, 마지막 페이지는 전체 데이터 수를 10으로 나눈 값을 올림하여 상수로 설정해주었습니다. 
+시작 페이지는 `state`를 사용, 현재 페이지는 `recoil`을 사용해서 전역으로 상태 관리가 가능하도록 설정해주었고, <br/>
+마지막 페이지는 전체 데이터 수를 10으로 나눈 값을 올림하여 상수로 설정해주었습니다. 
 
 ```
   const [startpage, setStartpage] = useState(1);
@@ -108,7 +109,7 @@ https://user-images.githubusercontent.com/99471927/186071503-d2598e55-c267-4302-
   
 ```
  
- 현재 
+ 현재 페이지를 클릭하면 getFilterData의 인수로 현재 클릭한 페이지를 인자로 넘겨주어 해당 함수를 실행합니다. 
  
 
 ```
@@ -118,22 +119,8 @@ https://user-images.githubusercontent.com/99471927/186071503-d2598e55-c267-4302-
     props.getFilterData(count);
   };
 
-  const onClickPrevPage = (event: any) => {
-    if (startpage === 1) return;
-    setStartpage((prev) => prev - 3);
-    props.getPage(Number((event.target as HTMLDivElement).id));
-    setCurrent(startpage - 3);
-  };
-
-  const onClickNextPage = (event: any) => {
-    if (!(startpage + 3 <= lastpage)) return;
-    setStartpage((prev) => prev + 3);
-    props.getPage(Number((event.target as HTMLDivElement).id));
-    setCurrent(startpage + 3);
-  };
-
 ```
-
+page 번호를 눌렀을 때 업데이트 된 현재페이지(current)값이 클릭된 페이지(startpage + index)와 같다면 색상을 진하게 변경해주어 선택된 현재 페이지를 시각적으로 보여줍니다. 
 
 ```
     {new Array(3).fill(1).map(
