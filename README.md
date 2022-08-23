@@ -94,3 +94,66 @@ https://user-images.githubusercontent.com/99471927/186070789-219bcbd2-d5fa-4c97-
 ### Mobile
 https://user-images.githubusercontent.com/99471927/186070675-a8bdce21-4fdb-4080-bf9b-b97eb42c66f4.mov
 
+
+### 4. Pagination
+
+https://user-images.githubusercontent.com/99471927/186071503-d2598e55-c267-4302-91a5-17021716ecb6.mov
+
+시작 페이지는 `state`를 사용, 현재 페이지는 `recoil`을 사용해서 전역으로 상태 관리가 가능하도록 설정해주었고, 마지막 페이지는 전체 데이터 수를 10으로 나눈 값을 올림하여 상수로 설정해주었습니다. 
+
+```
+  const [startpage, setStartpage] = useState(1);
+  const [current, setCurrent] = useRecoilState(currentPage);
+  const lastpage = Math.ceil(total / 10);
+  
+```
+ 
+ 현재 
+ 
+
+```
+  const onClickPage = (event: MouseEvent<HTMLButtonElement>) => {
+    const target = Number((event.target as HTMLDivElement).id);
+    setCurrent(target);
+    props.getFilterData(count);
+  };
+
+  const onClickPrevPage = (event: any) => {
+    if (startpage === 1) return;
+    setStartpage((prev) => prev - 3);
+    props.getPage(Number((event.target as HTMLDivElement).id));
+    setCurrent(startpage - 3);
+  };
+
+  const onClickNextPage = (event: any) => {
+    if (!(startpage + 3 <= lastpage)) return;
+    setStartpage((prev) => prev + 3);
+    props.getPage(Number((event.target as HTMLDivElement).id));
+    setCurrent(startpage + 3);
+  };
+
+```
+
+
+```
+    {new Array(3).fill(1).map(
+        (_, index) =>
+          index + props.startpage <= props.lastpage && (
+            <S.Pages
+              style={{
+                color:
+                  props.current === index + props.startpage ? "black" : "#999",
+                fontWeight:
+                  props.current === index + props.startpage ? 700 : 500,
+              }}
+              key={index + props.startpage}
+              id={String(index + props.startpage)}
+              onClick={props.onClickPage}
+            >
+              {index + props.startpage}
+            </S.Pages>
+          )
+      )}
+      
+   ```
+
