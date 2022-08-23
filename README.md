@@ -51,18 +51,20 @@ https://user-images.githubusercontent.com/99471927/186064749-cddfd642-43c5-400e-
   - 키워드를 눌렀을 때 누른 키워드게 맞게 데이터가 새로 fetch 됩니다.
   - 키워드에 해당하는 단어의 배경 색상이 달라집니다. 
     - 검색한 키워드를 찾아내기 위해서 `replaceAll` 과 `split` 메서드를 사용하였고 `map`을 이용하여 각 각의 단어를 `span태그`로 감싸주었습니다. 
+    <br/>
+    
     ```javascript
         {el.nickname
-                    .replaceAll(props.keyword, `#$%${props.keyword}#$%`)
-                    .split("#$%")
-                    .map((search: string) => (
-                      <span
-                        key={uuidv4()}
-                        isMatched={props.keyword === search}
-                      >
-                        {search}
-                      </span>
-                    ))}
+          .replaceAll(props.keyword, `#$%${props.keyword}#$%`)
+          .split("#$%")
+          .map((search: string) => (
+            <span
+              key={uuidv4()}
+              isMatched={props.keyword === search}
+            >
+              {search}
+            </span>
+        ))}
                     
        ```
   
@@ -81,4 +83,14 @@ https://user-images.githubusercontent.com/99471927/186065101-d337e4d6-a11d-43ac-
 <br/>
 
 ### 3. PC, 태블릿, 모바일에 맞는 반응형 서비스 
+
+### PC
+<img width="678" alt="스크린샷 2022-08-23 오후 1 31 14" src="https://user-images.githubusercontent.com/99471927/186070258-dc6c1c1c-d331-406a-9649-892d34f69358.png">
+
+### Tablet
+https://user-images.githubusercontent.com/99471927/186070789-219bcbd2-d5fa-4c97-957b-21980b281f42.mov
+
+
+### Mobile
+https://user-images.githubusercontent.com/99471927/186070675-a8bdce21-4fdb-4080-bf9b-b97eb42c66f4.mov
 
