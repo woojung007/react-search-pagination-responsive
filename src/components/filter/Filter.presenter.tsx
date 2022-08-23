@@ -1,4 +1,4 @@
-import { Fragment, MouseEvent } from "react";
+import { MouseEvent } from "react";
 import * as S from "./Filter.styles";
 
 interface IPropsFilterPresenter {

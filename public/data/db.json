@@ -103,44 +103,29 @@
   ],
   "search": [
     {
-      "id": "ee3d97c2-1a35-4700-a182-69d4984b710a",
       "word": "차차",
-      "count": 1
+      "count": 1,
+      "id": 1
     },
     {
-      "id": "3967d44f-2298-43ec-9d5e-4f1f6504e175",
       "word": "차차 목장",
-      "count": 1
+      "count": 1,
+      "id": 2
     },
     {
-      "id": "4386690a-8123-4dbd-9be8-94a2178bba8d",
-      "word": "이름",
-      "count": 1
+      "word": "목장",
+      "count": 1,
+      "id": 3
     },
     {
-      "id": "9260c4c0-bfce-459a-a6c0-8a4026c1d8ac",
-      "word": "ai",
-      "count": 1
-    },
-    {
-      "id": "fa1e3f0a-0c17-4b58-a91c-90daa11e63b6",
-      "word": "우정",
-      "count": 1
-    },
-    {
-      "id": "3891509b-34a8-4136-8bf4-39373cefdb65",
-      "word": "차차 제조도",
-      "count": 1
-    },
-    {
-      "id": "89d6218e-6289-4dc0-bd48-b20d028e0744",
       "word": "제조도",
-      "count": 1
+      "count": 1,
+      "id": 4
     },
     {
-      "id": "7837e35e-d0f2-45e0-ad67-8dd940876157",
-      "word": "공인즙개사",
-      "count": 1
+      "word": "이름",
+      "count": 1,
+      "id": 5
     }
   ]
 }

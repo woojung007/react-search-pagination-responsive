@@ -56,9 +56,13 @@ export default function BoardPresenter(props: IPropsBoardPresenter) {
           </S.SearchDiv>
           {props.isSearch && props.keyword && (
             <S.Dropdown>
-              {props.word?.map((el) => (
+              {props.word?.map((el, idx) => (
                 <div key={uuidv4()}>
-                  <S.Word onClick={props.onClickWord} id={el.word}>
+                  <S.Word
+                    onClick={props.onClickWord}
+                    id={el.word}
+                    tabIndex={idx + 1}
+                  >
                     {el.word}
                   </S.Word>
                 </div>
@@ -83,8 +87,6 @@ export default function BoardPresenter(props: IPropsBoardPresenter) {
         {props.isFilter && (
           <FilterPage
             getFilterData={props.getFilterData}
-            data={props.data}
-            allData={props.allData}
             getPage={props.getPage}
           />
         )}

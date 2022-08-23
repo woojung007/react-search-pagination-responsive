@@ -15,9 +15,8 @@ interface IPropsPagination {
 export default function PaginationPage(props: IPropsPagination) {
   const [total] = useRecoilState(totalState);
   const [startpage, setStartpage] = useState(1);
-  // const [current, setCurrent] = useState(1);
   const [current, setCurrent] = useRecoilState(currentPage);
-  const [count, setCount] = useRecoilState(countState);
+  const [count] = useRecoilState(countState);
   const lastpage = Math.ceil(total / 10);
 
   const onClickPage = (event: MouseEvent<HTMLButtonElement>) => {

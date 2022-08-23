@@ -1,8 +1,7 @@
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import BoardPresenter from "./Board.presenter";
-import _, { rest } from "lodash";
+import _ from "lodash";
 import { useRecoilState } from "recoil";
-import { v4 as uuidv4 } from "uuid";
 import { totalState, currentPage, countState } from "../../store/recoil";
 
 interface word {
@@ -13,19 +12,15 @@ interface word {
 export default function BoardContainer() {
   const [data, setData] = useState([]);
   const [allData, setAllData] = useState([]);
-  // const [data, setData] = useRecoilState(dataState);
-  // const [allData, setAllData] = useRecoilState(allDataState);
   const [keyword, setKeyword] = useState("");
   const [isFilter, setIsFilter] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
-  const [keywordCount, setKeywordCount] = useState(1);
-  // const [id, setId] = useState(1);
+  const [id, setId] = useState();
+  // const [keywordCount, setKeywordCount] = useState(1);
   const [word, setWord] = useState();
   const [total, setTotal] = useRecoilState(totalState);
   const [current] = useRecoilState(currentPage);
   const [count, setCount] = useRecoilState(countState);
-
-  // const [filterId, setFilterId] = useRecoilState(filterIdState);
 
   // const URL =
   //   "https://raw.githubusercontent.com/jejodo-dev-team/open-api/main/frontend.json";
@@ -45,7 +40,6 @@ export default function BoardContainer() {
   };
 
   const getData = async () => {
-    // const URL = "http://localhost:9000/data?_page=1";
     try {
       const res = await fetch(`${URL}/data?_page=1`);
       const data = await res.json();
@@ -61,7 +55,6 @@ export default function BoardContainer() {
   const getPage = async (page: number) => {
     let URL: any;
     if (count === 6) {
-      // return getData();
       URL = `http://localhost:9000/data?_page=${page}`;
     } else if (count === 5) {
       URL = `http://localhost:9000/data?_page=${page}?building_count_gte=5`;
@@ -81,7 +74,6 @@ export default function BoardContainer() {
   useEffect(() => {
     getData();
     getAllData();
-    // getFilterData(count);
     getPage(current);
   }, [current]);
 
@@ -107,7 +99,6 @@ export default function BoardContainer() {
   };
 
   const getSearchData = async (keyword?: undefined | string) => {
-    // const URL = `${URL}/data?q=${data}`;
     try {
       const res = await fetch(`${URL}/data?q=${keyword}`);
       const data = await res.json();
@@ -124,7 +115,6 @@ export default function BoardContainer() {
       const res = await fetch(URL);
       const data = await res.json();
       setWord(data.sort((a: word, b: word) => b.count - a.count));
-      // setWord(data);
     } catch (error) {
       console.log(error);
     }
@@ -141,15 +131,19 @@ export default function BoardContainer() {
     }
     getDebounce(event.target.value);
     setKeyword(event.target.value);
-    // getSearchData(event.target.value);
     setIsSearch(true);
   };
-
-  const keywordData = { id: uuidv4(), word: keyword, count: 1 };
 
   const onKeyUp = (event: any) => {
     if (event.keyCode === 13) {
       event.preventDefault();
+      setId((prev: any) => prev + 1);
+      const keywordData = {
+        id: id,
+        word: keyword,
+        count: 1,
+      };
+
       const postData = async () => {
         const URL = "http://localhost:9000/search";
         try {
@@ -159,14 +153,14 @@ export default function BoardContainer() {
             body: JSON.stringify(keywordData),
           });
           await response.json();
+          getWord(event.target.value);
+          setIsSearch((prev) => !prev);
         } catch (error) {
           console.log(error);
         }
       };
 
       postData();
-      getWord(event.target.value);
-      setIsSearch((prev) => !prev);
     }
   };
 
@@ -175,33 +169,29 @@ export default function BoardContainer() {
     setKeyword(event.target.id);
     getWord(event.target.id);
     setIsSearch(false);
-    setKeywordCount((prev) => prev + 1);
+    // setKeywordCount((prev: any) => prev + 1);
 
-    if (word) {
-      const putData = async () => {
-        try {
-          const res = await fetch(
-            `http://localhost:9000/search?word=${keyword}`,
-            {
-              method: "PUT",
-              body: JSON.stringify({
-                id: uuidv4(),
-                word: keyword,
-                count: keywordCount,
-              }),
-              headers: {
-                "Content-type": "application/json",
-              },
-            }
-          );
-          await res.json();
-        } catch (error) {
-          console.log(error);
-        }
-      };
+    // const putData = async (id: any) => {
+    //   const updateData = {
+    //     id: id,
+    //     word: event.target.id,
+    //     count: keywordCount,
+    //   };
+    //   try {
+    //     const response = await fetch(`http://localhost:9000/search?id=${id}`, {
+    //       method: "PUT",
+    //       body: JSON.stringify(updateData),
+    //       headers: {
+    //         "Content-type": "application/json",
+    //       },
+    //     });
+    //     await response.json();
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
 
-      putData();
-    }
+    // putData(event.target.tabIndex);
   };
 
   const onClickFilterIcon = () => {
