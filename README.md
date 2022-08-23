@@ -50,6 +50,21 @@ https://user-images.githubusercontent.com/99471927/186064749-cddfd642-43c5-400e-
 
   - 키워드를 눌렀을 때 누른 키워드게 맞게 데이터가 새로 fetch 됩니다.
   - 키워드에 해당하는 단어의 배경 색상이 달라집니다. 
+    - 검색한 키워드를 찾아내기 위해서 `replaceAll` 과 `split` 메서드를 사용하였고 `map`을 이용하여 각 각의 단어를 `span태그`로 감싸주었습니다. 
+    ```javascript
+        {el.nickname
+                    .replaceAll(props.keyword, `#$%${props.keyword}#$%`)
+                    .split("#$%")
+                    .map((search: string) => (
+                      <span
+                        key={uuidv4()}
+                        isMatched={props.keyword === search}
+                      >
+                        {search}
+                      </span>
+                    ))}
+                    
+       ```
   
 <br/>
 
@@ -57,7 +72,8 @@ https://user-images.githubusercontent.com/99471927/186064749-cddfd642-43c5-400e-
 
 https://user-images.githubusercontent.com/99471927/186065101-d337e4d6-a11d-43ac-9395-01caa73d4d5d.mov
 
-- `flex-direction: row-reverse;` 와 `flex-wrap: wrap-reverse;` 를 사용해서 필터의 id값과 인덱스 번호를 통일시켜 현재 누른 필터를 알 수 있도록 하였습니다. 
+- 보유 빌딩의 수와 클릭한 태그의 id값이 동일한지 여부에 대해서 알아야 했는데 반대로 정렬을 하면 해결할 수 있을 것 같았습니다. <br/>
+   그래서 `flex-direction: row-reverse;` 와 `flex-wrap: wrap-reverse;` 를 사용해서 필터의 id값과 인덱스 번호를 통일시켜 현재 누른 필터가 무엇인지 알 수 있도록 하였습니다. 
 - 보유 빌딩의 수가 5개 이상인 데이터를 요청할 때는 Rest-api의 operator인 `gte`를 사용해서 데이터를 요청하였습니다. 
 `http://localhost:9000/data?_page=${page}?building_count_gte=5`
 
