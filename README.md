@@ -1,6 +1,6 @@
-# JEJODO Frontend Coding Test
+# 🏝 JEJODO Frontend Coding Test
 
-## 프로젝트 시작하기
+## 🚀 프로젝트 시작하기
 json-server 시작하기 : `yarn server`<br/>
 react 시작하기 : `yarn start`
 
@@ -11,7 +11,7 @@ react 시작하기 : `yarn start`
 
 <br/>
 
-## 디렉토리 구조
+## 📁 디렉토리 구조
 ### public
 
 ```
@@ -44,7 +44,7 @@ react 시작하기 : `yarn start`
 ## 상세 구현 사항
 
 
-### 1. `lodash` 라이브러리를 사용한 키워드 실시간 검색 기능
+### 📌 1. `lodash` 라이브러리를 사용한 키워드 실시간 검색 기능
 
 https://user-images.githubusercontent.com/99471927/186064749-cddfd642-43c5-400e-a94f-10c4988645d4.mov
 
@@ -70,7 +70,7 @@ https://user-images.githubusercontent.com/99471927/186064749-cddfd642-43c5-400e-
   
 <br/>
 
-### 2. 데이터 필터링
+### 📌 2. 데이터 필터링
 
 https://user-images.githubusercontent.com/99471927/186065101-d337e4d6-a11d-43ac-9395-01caa73d4d5d.mov
 
@@ -82,7 +82,7 @@ https://user-images.githubusercontent.com/99471927/186065101-d337e4d6-a11d-43ac-
 
 <br/>
 
-### 3. PC, 태블릿, 모바일에 맞는 반응형 서비스 
+### 📌 3. PC, 태블릿, 모바일에 맞는 반응형 서비스 
 
 ### PC
 <img width="678" alt="스크린샷 2022-08-23 오후 1 31 14" src="https://user-images.githubusercontent.com/99471927/186070258-dc6c1c1c-d331-406a-9649-892d34f69358.png">
@@ -94,15 +94,16 @@ https://user-images.githubusercontent.com/99471927/186070789-219bcbd2-d5fa-4c97-
 ### Mobile
 https://user-images.githubusercontent.com/99471927/186070675-a8bdce21-4fdb-4080-bf9b-b97eb42c66f4.mov
 
+<br/>
 
-### 4. Pagination
+### 📌 4. Pagination
 
 https://user-images.githubusercontent.com/99471927/186071503-d2598e55-c267-4302-91a5-17021716ecb6.mov
 
 시작 페이지는 `state`를 사용, 현재 페이지는 `recoil`을 사용해서 전역으로 상태 관리가 가능하도록 설정해주었고, <br/>
 마지막 페이지는 전체 데이터 수를 10으로 나눈 값을 올림하여 상수로 설정해주었습니다. 
 
-```
+```javascript
   const [startpage, setStartpage] = useState(1);
   const [current, setCurrent] = useRecoilState(currentPage);
   const lastpage = Math.ceil(total / 10);
@@ -112,7 +113,7 @@ https://user-images.githubusercontent.com/99471927/186071503-d2598e55-c267-4302-
  현재 페이지를 클릭하면 getFilterData의 인수로 현재 클릭한 페이지를 인자로 넘겨주어 해당 함수를 실행합니다. 
  
 
-```
+```javascript
   const onClickPage = (event: MouseEvent<HTMLButtonElement>) => {
     const target = Number((event.target as HTMLDivElement).id);
     setCurrent(target);
@@ -122,25 +123,25 @@ https://user-images.githubusercontent.com/99471927/186071503-d2598e55-c267-4302-
 ```
 page 번호를 눌렀을 때 업데이트 된 현재페이지(current)값이 클릭된 페이지(startpage + index)와 같다면 색상을 진하게 변경해주어 선택된 현재 페이지를 시각적으로 보여줍니다. 
 
-```
-    {new Array(3).fill(1).map(
-        (_, index) =>
-          index + props.startpage <= props.lastpage && (
-            <S.Pages
-              style={{
-                color:
-                  props.current === index + props.startpage ? "black" : "#999",
-                fontWeight:
-                  props.current === index + props.startpage ? 700 : 500,
-              }}
-              key={index + props.startpage}
-              id={String(index + props.startpage)}
-              onClick={props.onClickPage}
-            >
-              {index + props.startpage}
-            </S.Pages>
-          )
-      )}
+```javascript
+{new Array(3).fill(1).map(
+    (_, index) =>
+      index + props.startpage <= props.lastpage && (
+        <S.Pages
+          style={{
+            color:
+              props.current === index + props.startpage ? "black" : "#999",
+            fontWeight:
+              props.current === index + props.startpage ? 700 : 500,
+          }}
+          key={index + props.startpage}
+          id={String(index + props.startpage)}
+          onClick={props.onClickPage}
+        >
+          {index + props.startpage}
+        </S.Pages>
+      )
+  )}
       
    ```
 
