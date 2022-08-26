@@ -3,6 +3,7 @@ import BoardPresenter from "./Board.presenter";
 import _ from "lodash";
 import { useRecoilState } from "recoil";
 import { totalState, currentPage, countState } from "../../store/recoil";
+import axios from "axios";
 
 interface word {
   word: string;
@@ -15,11 +16,12 @@ export default function BoardContainer() {
   const [keyword, setKeyword] = useState("");
   const [isFilter, setIsFilter] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
-  const [id, setId] = useState();
+  // const [id, setId] = useState();
   const [word, setWord] = useState();
   const [total, setTotal] = useRecoilState(totalState);
   const [current] = useRecoilState(currentPage);
   const [count, setCount] = useRecoilState(countState);
+  let id: number;
 
   // const URL =
   //   "https://raw.githubusercontent.com/jejodo-dev-team/open-api/main/frontend.json";
@@ -133,10 +135,24 @@ export default function BoardContainer() {
     setIsSearch(true);
   };
 
+  const postData = async (event: any) => {
+    event.preventDefault();
+    // setId((prev: any) => prev + 1);
+    try {
+      const res = await axios.post("http://localhost:9000/search", {
+        id: id,
+        word: keyword,
+        count: 1,
+      });
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const onKeyUp = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.keyCode === 13) {
-      // event.preventDefault();
-      // setId((prev: any) => prev + 1);
+      event.preventDefault();
       // const keywordData = {
       //   id: id,
       //   word: keyword,
@@ -158,7 +174,6 @@ export default function BoardContainer() {
       //   }
       // };
       // postData();
-      getWord((event.target as HTMLInputElement).value);
     }
   };
 
@@ -216,6 +231,7 @@ export default function BoardContainer() {
       getAllData={getAllData}
       getPage={getPage}
       total={total}
+      postData={postData}
     />
   );
 }
