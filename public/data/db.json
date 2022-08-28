@@ -104,48 +104,58 @@
   "search": [
     {
       "word": "차차",
-      "count": 1,
+      "count": 777,
       "id": 1
     },
     {
       "word": "차차 목장",
-      "count": 1,
+      "count": 456,
       "id": 2
     },
     {
       "word": "제조도",
-      "count": 1,
+      "count": 999,
       "id": 3
     },
     {
-      "word": "제조도 섬",
-      "count": 1,
-      "id": 4
+      "id": 4,
+      "word": "열번째",
+      "count": 222
     },
     {
       "word": "이름",
-      "count": 1,
+      "count": 456,
       "id": 5
     },
     {
-      "word": "제조도 메타버스",
-      "count": 1,
-      "id": 6
+      "id": 6,
+      "word": "상하",
+      "count": 222
     },
     {
-      "word": "화섬",
-      "count": 1,
+      "word": "제조도 섬",
+      "count": 456,
       "id": 7
     },
     {
-      "word": "지구",
-      "count": 1,
+      "word": "제조도 메타버스",
+      "count": 9,
       "id": 8
+    },
+    {
+      "word": "화목",
+      "count": 1,
+      "id": 9
+    },
+    {
+      "word": "화섬",
+      "count": 777,
+      "id": 10
     },
     {
       "word": "아파트",
       "count": 1,
-      "id": 9
+      "id": 11
     }
   ]
 }

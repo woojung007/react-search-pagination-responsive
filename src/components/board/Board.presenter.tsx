@@ -29,7 +29,8 @@ interface IPropsBoardPresenter {
   getAllData: () => void;
   getPage: (page: number) => void;
   total: number;
-  postData: any;
+  updateData: any;
+  inputRef: any;
 }
 
 export default function BoardPresenter(props: IPropsBoardPresenter) {
@@ -46,19 +47,27 @@ export default function BoardPresenter(props: IPropsBoardPresenter) {
           같이 화성에 가는날을 기다리며 화목하게 지내봐요!{" "}
         </S.Content>
         <S.SearchWrapper>
-          <S.SearchDiv>
+          <S.SearchForm
+          // onSubmit={props.onClickSearch}
+          // method="POST"
+          // autoComplete="off"
+          >
             <S.SearchInput
               placeholder="검색"
               type="text"
               onChange={props.onChangeKeyword}
               onKeyUp={props.onKeyUp}
               value={props.keyword || ""}
+              ref={props.inputRef}
             />
-            <FiSearch
-              style={{ fontSize: 14, cursor: "pointer" }}
-              onClick={props.postData}
-            />
-          </S.SearchDiv>
+            <S.SearchBtn
+              type="button"
+              // FiSearch
+              // style={{ fontSize: 14, cursor: "pointer" }}
+            >
+              Search
+            </S.SearchBtn>
+          </S.SearchForm>
           {props.isSearch && props.keyword && (
             <S.Dropdown>
               {props.word?.map((el, idx) => (

@@ -78,7 +78,7 @@ export const SearchWrapper = styled.div`
   }
 `;
 
-export const SearchDiv = styled.div`
+export const SearchForm = styled.div`
   width: 100%;
   height: 32px;
   background: #fff;
@@ -101,6 +101,10 @@ export const SearchInput = styled.input`
   letter-spacing: -0.05em;
   border: none;
   outline: none;
+`;
+
+export const SearchBtn = styled.button`
+  cursor: pointer;
 `;
 
 export const Dropdown = styled.div`
@@ -194,6 +198,7 @@ export const FilterItem = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 
 export const Profile = styled.img`
