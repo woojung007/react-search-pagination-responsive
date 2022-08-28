@@ -21,8 +21,6 @@ export default function BoardContainer() {
   const [current] = useRecoilState(currentPage);
   const [count, setCount] = useRecoilState(countState);
   let id: number;
-  // let searchCount = 1;
-  const [searchCount, setSearchCount] = useState();
   const inputRef = useRef<any>(null);
 
   // const URL =
@@ -151,7 +149,7 @@ export default function BoardContainer() {
       } else {
         await axios.put(`http://localhost:9000/search/${data[0].id}`, {
           word: keyword,
-          count: 777,
+          count: data[0].count + 1,
         });
       }
     } catch (error) {
@@ -160,7 +158,7 @@ export default function BoardContainer() {
   };
 
   const onClickWord = (event: any) => {
-    // setKeyword(event.target.id);
+    setKeyword(event.target.id);
     updateData(event.target.id);
     getSearchData(event.target.id);
     setIsSearch(false);
