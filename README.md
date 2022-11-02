@@ -7,7 +7,7 @@ react 시작하기 : `yarn start`
 <br/>
 
 ## 사용한 기술 스택 및 라이브러리
-`React` `Typescript` `recoil` `lodash`  `json-server` `Emotion` `react-icons`
+`React` `Typescript` `recoil` `lodash`  `json-server` `Emotion`
 
 <br/>
 
