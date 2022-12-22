@@ -1,11 +1,13 @@
-## 🚀 프로젝트 시작하기
-json-server 시작하기 : `yarn server`<br/>
-react 시작하기 : `yarn start`
+# 검색기능, 페이지네이션, 반응형 웹 구현하기
+
+사용한 기술 스택 및 라이브러리 : `React` `Typescript` `recoil` `lodash`  `json-server` `Emotion`
 
 <br/>
 
-## 사용한 기술 스택 및 라이브러리
-`React` `Typescript` `recoil` `lodash`  `json-server` `Emotion`
+
+## 프로젝트 시작하기
+json-server 시작하기 : `yarn server`<br/>
+react 시작하기 : `yarn start`
 
 <br/>
 
