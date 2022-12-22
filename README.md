@@ -1,5 +1,3 @@
-# 🏝 JEJODO Frontend Coding Test
-
 ## 🚀 프로젝트 시작하기
 json-server 시작하기 : `yarn server`<br/>
 react 시작하기 : `yarn start`
